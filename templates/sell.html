@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m8 s12">
+            <br>
+            <h2><center>{{ page_title }}</center></h2>
+            <p>Listing an item up for sale with us couldn't be any easier. Simply fill out the details of the item you're looking to sell in the form below, and your item will automatically be uploaded onto our site.</p>
+            <p>Be sure to upload a photo of the item you are selling, and be as descriptive as possible if there are any signs of wear and tear.</p>
+            <br>
+        </div>
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        
+        <!-- FORM -->
+        
+        <form class="col m6 s12" action="{{ request.path }}" method="POST">
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <input placeholder="Product Name Here" id="name" name="name" type="text" class="validate">
+              <label for="name">Product Name</label>
+            </div>
+            <div class="input-field col m6 s12">
+              <input placeholder="E.g. Fred Perry" id="brand" name="brand" type="text" class="validate">
+              <label for="brand">Brand</label>
+            </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m6 s12">
+                <select name="size">
+                  <optgroup label="Top">
+                    <option value="1">XS</option>
+                    <option value="2">S</option>
+                    <option value="3">M</option>
+                    <option value="4">L</option>
+                    <option value="5">XL</option>
+                    <option value="6">XXL</option>
+                  </optgroup>
+                  <optgroup label="Bottom">
+                    <option value="7">28in</option>
+                    <option value="8">30in</option>
+                    <option value="9">32in</option>
+                    <option value="10">34in</option>
+                    <option value="11">36in</option>
+                    <option value="12">38in</option>
+                  </optgroup>
+                  <optgroup label="Feet">
+                    <option value="13">5</option>
+                    <option value="14">6</option>
+                    <option value="15">7</option>
+                    <option value="16">8</option>
+                    <option value="17">9</option>
+                    <option value="18">10</option>
+                    <option value="19">11</option>
+                    <option value="20">12</option>
+                    <option value="21">13</option>
+                  </optgroup>
+                </select>
+                <label for="size">Size</label>
+              </div>
+              <div class="input-field col m6 s12">
+                <select name="colour">
+                  <option value="1">Beige</option>
+                  <option value="2">Black</option>
+                  <option value="3">Blue</option>
+                  <option value="4">Brown</option>
+                  <option value="5">Cream</option>
+                  <option value="6">Gold</option>
+                  <option value="7">Green</option>
+                  <option value="8">Grey</option>
+                  <option value="9">Multi</option>
+                  <option value="10">Navy</option>
+                  <option value="11">Orange</option>
+                  <option value="12">Pink</option>
+                  <option value="13">Purple</option>
+                  <option value="14">Red</option>
+                  <option value="15">Silver</option>
+                  <option value="16">Stone</option>
+                  <option value="17">Tan</option>
+                  <option value="18">White</option>
+                  <option value="19">Yellow</option>
+                </select>
+                <label for="colour">Colour</label>
+              </div>
+          </div>
+          <div class="row">
+            <div class="input-field col m6 s12">
+                <select name="gender">
+                  <option value="1">Mens</option>
+                  <option value="2">Womens</option>
+                  <option value="3">Unisex</option>
+                </select>
+                <label for="gender">Gender</label>
+            </div>
+            <div class="input-field col m6 s12">
+                <select name="cond">
+                  <option value="1">New</option>
+                  <option value="2">Used</option>
+                  <option value="3">Used (Like New)</option>
+                </select>
+                <label for="cond">Condition</label>
+            </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m12 s12">
+                  <input placeholder="Describe Your Product" id="info" name="info" type="text" class="validate">
+                  <label for="info">Product Description</label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m6 s12">
+                  <input placeholder="E.g. 25" id="price" name="price" type="text" class="validate">
+                  <label for="price">Asking Price</label>
+              </div>
+              <div class="input-field col m6 s12">
+                  <!-- <input type="file" name="file"> -->
+                  <!-- <label>Image</label> -->
+              </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m12 s12" id="buttons">
+                  <button class="btn waves-effect waves-light" type="submit" value="submit">List Your Item
+                    <i class="material-icons right">send</i>
+                  </button>
+              </div>
+          </div>
+        </form>
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+</div>
+{% endblock %}

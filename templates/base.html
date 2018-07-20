@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Righteous|Roboto+Mono|Roboto+Slab|Shrikhand" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+        <style>
+            .brand-logo{
+                margin-left: 20px;
+                font-family: 'Shrikhand', cursive;
+                color: #e6f2ff;
+            }
+            .dropdown-trigger{
+                margin-right: 20px;
+            }
+            .navbar{
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+            }
+            .nav-wrapper{
+                background-color: #b30000;
+            }
+            h2{
+                font-family: 'Righteous', cursive;
+            }
+            p{
+                font-family: 'Roboto Slab', serif;
+                font-size: 20px;
+                text-align: center;
+            }
+            body{
+                background-color: #e6f2ff;
+            }
+            .mySlides{
+                width: 100%;
+                min-height: 200px;
+                max-height: 500px;
+                -webkit-filter: sepia(.2) opacity(0.8);
+            }
+            .btn-large,
+            .waves-effect{
+                background-color: #b30000;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                align-self: stretch !important;
+                border-radius: 10px;
+            }
+            .btn-large:hover,
+            .btn-large:focus,
+            .btn-large:active,
+            .waves-effect:hover,
+            .waves-effect:focus,
+            .waves-effect:active{
+                background-color: #990000;
+            }
+            .container{
+                margin-top: 64px;
+            }
+            #buttons{
+                text-align: center;
+            }
+            .tab{
+                font-family: 'Righteous', cursive;
+                background-color: #cce5ff;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="#!">Brand</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">Gender</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">Size</a></li>
+        </ul>
+        <nav class="navbar">
+          <div class="nav-wrapper">
+            <a href="{{ url_for('index') }}" class="brand-logo">Next Man's Treasure</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="{{ url_for('index') }}">Home<i class="material-icons right">home</i></a></li>
+              <li><a href="{{ url_for('user') }}">My Account<i class="material-icons right">lock_open</i></a></li>
+              <li><a href="{{ url_for('sell') }}">Sell<i class="material-icons right">attach_money</i></a></li>
+              <!-- Dropdown Trigger -->
+              <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Browse by<i class="material-icons right">search</i></a></li>
+            </ul>
+          </div>
+        </nav>
+        <ul class="sidenav" id="mobile-demo">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('user') }}">My Account</a></li>
+          <li><a href="{{ url_for('sell') }}">Sell</a></li>
+          <li><a href="#!">Browse by Brand</a></li>
+          <li><a href="#!">Browse by Gender</a></li>
+          <li><a href="#!">Browse by Size</a></li>
+        </ul>
+        {% block content %}
+        {% endblock %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        <script src="C:/Users/Sam/Stream_One_Project/Bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript">
+            
+            /* Dropdown side menu */
+            
+            $(document).ready(function(){
+                $(".dropdown-trigger").dropdown();
+                $(".sidenav").sidenav();
+                $('select').formSelect();
+            });
+            
+            /* Login & register tabs */
+            
+            $(document).ready(function(){
+                $('.tabs').tabs();
+            });
+            
+            /* Home page slide show */
+            
+            var slideIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("mySlides");
+                for (i = 0; i < x.length; i++) {
+                  x[i].style.display = "none"; 
+                }
+                slideIndex++;
+                if (slideIndex > x.length) {slideIndex = 1} 
+                x[slideIndex-1].style.display = "block"; 
+                setTimeout(carousel, 5000);
+                
+            }
+        </script>
+    </body>
+</html>

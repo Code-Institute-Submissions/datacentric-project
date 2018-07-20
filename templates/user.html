@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m8 s12">
+            <br>
+            <h2><center>{{ page_title }}</center></h2>
+            <p>Enter your login details below or register for an account to begin listing items on our site.</p>
+            <br>
+        </div>
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+        
+    <!-- LOGIN & REGISTER FORMS -->
+        
+    <div class="row">
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m6 s12">
+            <ul id="login-register-tabs" class="tabs">
+                <li class="tab col m6 s12"><a class="active" href="#login-tab">Login</a></li>
+                <li class="tab col m6 s12"><a href="#register-tab">Register</a></li>
+            </ul>
+            
+            <!-- Login tab -->
+            
+            <div id="login-tab" class="col m12 s12">
+            <br>
+              <form method="POST">
+                <div class="input-field col m12 s12">
+                  <input placeholder="" id="login-username" name="username" type="text" class="validate">                  
+                  <label for="name">Username</label>
+                </div>
+                <div class="input-field col m12 s12">
+                  <input placeholder="" id="login-password" name="password" type="text" class="validate">
+                  <label for="name">Password</label>
+                </div>
+                <div class="input-field col m12 s12" id="buttons">
+                    <button class="btn waves-effect waves-light" type="submit" value="submit">Login
+                        <i class="material-icons right">lock_open</i>
+                    </button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Register tab -->
+            
+            <div id="register-tab" class="col m12 s12">
+            <br>
+              <form method="POST" action="/user">
+                <div class="input-field col m12 s12">
+                  <input placeholder="" id="username" name="username" type="text" class="validate">                  
+                  <label for="name">Username</label>
+                </div>
+                <div class="input-field col m12 s12">
+                  <input placeholder="Enter Email Address Here" id="email" name="email" type="email" class="validate">
+                  <label for="contact">Email</label>
+                </div>
+                <div class="input-field col m12 s12">
+                  <input placeholder="" id="password" name="password" type="text" class="validate">
+                  <label for="name">Password</label>
+                </div>
+                <div class="input-field col m12 s12" id="buttons">
+                    <button class="btn waves-effect waves-light" type="submit" value="submit">Register
+                        <i class="material-icons right">lock_open</i>
+                    </button>
+                </div>
+              </form>
+            </div>
+        </div>
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+</div>
+{% endblock %}
