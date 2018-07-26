@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-warning alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button>
+              {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <div class="row">
         <img class="mySlides" src="https://c1.staticflickr.com/8/7638/17122877512_67d2a34db4_b.jpg">
         <img class="mySlides" src="https://c1.staticflickr.com/5/4500/37371902416_665db92560_b.jpg">
@@ -10,7 +20,7 @@
             <!-- Empty for styling purposes -->
         </div>
         <div class="col m8 s12">
-            <h2><center>Welcome to Next Man's Treasure</center></h2>
+            <h2><center>Welcome</center></h2>
             <p>Next Man's Treasure is a platform to browse, purchase, share and advertise items of clothing, old or new.</p>
             <p>Whether you're looking to add to your wardrobe, or offload some unwanted garments while making a bit of money in the process, our free service will put you in touch with the right people.</p>
             <p>If you're looking to sell items, please log into your account by following the link below, if you haven't already. Otherwise, feel free to browse what's available now.</p>

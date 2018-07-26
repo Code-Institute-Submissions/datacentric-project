@@ -65,6 +65,16 @@
                 font-family: 'Righteous', cursive;
                 background-color: #cce5ff;
             }
+            #loadFile{
+                height: 40px;
+                width: 130px;
+                font-family: 'Roboto Slab', serif;
+                text-align: center;
+                align-self: stretch !important;
+                background-color: #34bcb5;
+                color: #ffffff;
+                border-radius: 10px;
+            }
         </style>
     </head>
     <body>
@@ -84,6 +94,7 @@
               <li><a href="{{ url_for('index') }}">Home<i class="material-icons right">home</i></a></li>
               <li><a href="{{ url_for('user') }}">My Account<i class="material-icons right">lock_open</i></a></li>
               <li><a href="{{ url_for('sell') }}">Sell<i class="material-icons right">attach_money</i></a></li>
+              <li><a href="{{ url_for('logout') }}">Logout<i class="material-icons right">exit_to_app</i></a></li>
               <!-- Dropdown Trigger -->
               <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Browse by<i class="material-icons right">search</i></a></li>
             </ul>
@@ -96,12 +107,13 @@
           <li><a href="#!">Browse by Brand</a></li>
           <li><a href="#!">Browse by Gender</a></li>
           <li><a href="#!">Browse by Size</a></li>
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
         {% block content %}
         {% endblock %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-        <script src="C:/Users/Sam/Stream_One_Project/Bootstrap/js/bootstrap.js"></script>
+        <!-- <script src="C:/Users/Sam/Stream_One_Project/Bootstrap/js/bootstrap.js"></script> -->
         <script type="text/javascript">
             
             /* Dropdown side menu */
