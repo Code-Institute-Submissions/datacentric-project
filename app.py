@@ -1,10 +1,11 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
+import db
 
 app = Flask('__name__')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sixers1983@localhost/test'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sixers1983@localhost/mydatabase'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 app.debug = True
@@ -25,32 +26,35 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password = password
+    
+#    def __repr__(self):
+#        return '<User: username=%r, email=%r, password=%r>' % (self.username, self.email, self.password)
 
-class Items(db.Model):
-    id = db.Column('id', db.Integer, primary_key=True)
-    name = db.Column(db.Unicode(50))
-    brand = db.Column(db.Unicode(20))
-    size = db.Column(db.Unicode(4))
-    colour = db.Column(db.Unicode(10))
-    cond = db.Column(db.Unicode(15))
-    gender = db.Column(db.Unicode(6))
-    info = db.Column(db.Unicode(90))
-    price = db.Column(db.Integer)
-    contact = db.Column(db.Unicode(50))
-    imageName = db.Column(db.String(50))
-    imageData = db.Column(db.LargeBinary)
+#class Items(db.Model):
+#    id = db.Column('id', db.Integer, primary_key=True)
+#    name = db.Column(db.Unicode(50))
+#    brand = db.Column(db.Unicode(20))
+#    size = db.Column(db.Unicode(4))
+#    colour = db.Column(db.Unicode(10))
+#    cond = db.Column(db.Unicode(15))
+#    gender = db.Column(db.Unicode(6))
+#    info = db.Column(db.Unicode(90))
+#    price = db.Column(db.Integer)
+#    contact = db.Column(db.Unicode(50))
+#    imageName = db.Column(db.String(50))
+#    imageData = db.Column(db.LargeBinary)
 
-    def __init__(self, id, name, brand, size, colour, cond, gender, info, price, contact):
-        self.id = id
-        self.name = name
-        self.brand = brand
-        self.size = size
-        self.colour = colour
-        self.cond = cond
-        self.gender = gender
-        self.info = info
-        self.price = price
-        self.contact = contact
+#    def __init__(self, id, name, brand, size, colour, cond, gender, info, price, contact):
+#        self.id = id
+#        self.name = name
+#        self.brand = brand
+#        self.size = size
+#        self.colour = colour
+#        self.cond = cond
+#        self.gender = gender
+#        self.info = info
+#        self.price = price
+#        self.contact = contact
 
 # (name VARCHAR(50), brand VARCHAR(20), size VARCHAR(4), colour VARCHAR(10), cond VARCHAR(15), gender VARCHAR(6), info VARCHAR(100), price int, contact VARCHAR(50));
 
@@ -76,12 +80,22 @@ def add_user():
     db.session.add(user)
     db.session.commit()
     session['logged_in'] = True
-    return redirect(url_for('index'))
+    return redirect(url_for('account'))
+
+@app.route('/account/<username>', methods=["GET", "POST"])
+def account(username):
+    """ Displays user account once logged in """
+    user = User.query.filter_by(username=username).first()
+    return render_template("account.html", user=user)
+    
+
 
 #    if request.form['password'] == 'password' and request.form['username'] == 'admin':
 #        session['logged_in'] = True
 #    else:
 #        flash('Wrong username and/or password')
+
+
 
 @app.route('/logout')
 def logout():
