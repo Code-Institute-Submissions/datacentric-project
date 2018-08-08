@@ -11,6 +11,15 @@
             <p>Listing an item up for sale with us couldn't be any easier. Simply fill out the details of the item you're looking to sell in the form below, and your item will automatically be uploaded onto our site.</p>
             <p>Be sure to upload a photo of the item you are selling, and be as descriptive as possible if there are any signs of wear and tear.</p>
             <br>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert" role="alert">
+                      {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
         </div>
         <div class="col m2 s0">
             <!-- Empty for styling purposes -->
@@ -22,7 +31,7 @@
         </div>
         
         <!-- FORM -->
-        <form class="col m6 s12" method="POST" action="{{ request.path }}" action="/upload" enctype="multipart/form-data">
+        <form class="col m6 s12" method="POST" action="/upload" enctype="multipart/form-data">
           <div class="row">
             <div class="input-field col m6 s12">
               <input placeholder="Product Name Here" id="name" name="name" type="text" class="validate">
@@ -128,8 +137,8 @@
           </div>
           <div class="row">
               <div class="input-field col m12 s12">
-                  <input placeholder="Enter your email address here" id="info" name="info" type="text" class="validate">
-                  <label for="info">Email</label>
+                  <input placeholder="Enter your email address here" id="contact" name="contact" type="text" class="validate">
+                  <label for="contact">Email</label>
               </div>
           </div>
           <div class="row">

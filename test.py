@@ -77,14 +77,6 @@ def login():
         flash("Username and password combination not recognised. Please try again.")
         return render_template('user.html')
 
-@app.route('/user', methods=["GET", "POST"])
-def user():
-    """ Redirects user to account or login page """
-    if current_user.is_active:
-        return redirect(url_for('account'))
-    else:
-        return render_template("user.html", page_title="Log in to your account")
-
 @app.route('/account/<username>', methods=["GET", "POST"])
 @login_required
 def account(username):
@@ -101,6 +93,13 @@ def load_user(user_id):
     """ Returns user object from SQLAlchemy """
     return User.query.get(int(user_id))
 
+@app.route('/user', methods=["GET", "POST"])
+def user():
+    """ Redirects user to account or login page """
+    if current_user.is_active:
+        return render_template("account.html", user=user)
+    else:
+        return render_template("user.html", page_title="Log in to your account")
 
 @app.route('/logout')
 @login_required

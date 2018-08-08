@@ -10,6 +10,15 @@
             <h2><center>{{ page_title }}</center></h2>
             <p>Enter your login details below or register for an account to begin listing items on our site.</p>
             <br>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert" role="alert">
+                      {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
         </div>
         <div class="col m2 s0">
             <!-- Empty for styling purposes -->
@@ -28,18 +37,20 @@
                 <li class="tab col m6 s12"><a href="#register-tab">Register</a></li>
             </ul>
             
-            <!-- Login tab 
+            <!-- Login tab -->
             
             <div id="login-tab" class="col m12 s12">
             <br>
-              <form method="POST">
+              <form method="POST" action="/login">
                 <div class="input-field col m12 s12">
-                  <input placeholder="" id="login-username" name="username" type="text" class="validate">                  
+                  <input id="loginUsername" name="username" type="text" class="validate">                  
                   <label for="name">Username</label>
                 </div>
                 <div class="input-field col m12 s12">
-                  <input placeholder="" id="login-password" name="password" type="text" class="validate">
+                  <input id="loginPassword" name="password" type="password" class="validate">
                   <label for="name">Password</label>
+                  <!-- FIX CHECKBOX -->
+                  <input type="checkbox" onclick="passwordToggle()" />Show Password
                 </div>
                 <div class="input-field col m12 s12" id="buttons">
                     <button class="btn waves-effect waves-light" type="submit" value="submit">Login
@@ -49,24 +60,24 @@
               </form>
             </div>
             
-            -->
-            
             <!-- Register tab -->
             
             <div id="register-tab" class="col m12 s12">
             <br>
               <form method="POST" action="/add_user">
                 <div class="input-field col m12 s12">
-                  <input placeholder="" id="username" name="username" type="text" class="validate">                  
+                  <input id="registerUsername" name="username" type="text" class="validate">                  
                   <label for="name">Username</label>
                 </div>
                 <div class="input-field col m12 s12">
-                  <input placeholder="Enter Email Address Here" id="email" name="email" type="email" class="validate">
+                  <input id="registerEmail" name="email" type="email" class="validate">
                   <label for="contact">Email</label>
                 </div>
                 <div class="input-field col m12 s12">
-                  <input placeholder="" id="password" name="password" type="text" class="validate">
+                  <input id="loginPassword" name="password" type="password" class="validate">
                   <label for="name">Password</label>
+                  <!-- FIX CHECKBOX -->
+                  <input type="checkbox" onclick="passwordToggle()" />Show Password
                 </div>
                 <div class="input-field col m12 s12" id="buttons">
                     <button class="btn waves-effect waves-light" type="submit" value="submit">Register

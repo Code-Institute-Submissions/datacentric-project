@@ -75,9 +75,14 @@
                 color: #ffffff;
                 border-radius: 10px;
             }
+            .alert{
+                text-align: center;
+                color: #ff0000;
+            }
         </style>
     </head>
     <body>
+        
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
           <li><a href="#!">Brand</a></li>
@@ -92,8 +97,7 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
               <li><a href="{{ url_for('index') }}">Home<i class="material-icons right">home</i></a></li>
-              <li><a href="{{ url_for('user') }}">Login<i class="material-icons right">lock_open</i></a></li>
-              <li><a href="{{ url_for('account') }}">My Account<i class="material-icons right">face</i></a></li>
+              <li><a href="{{ url_for('user') }}">My Account<i class="material-icons right">lock_open</i></a></li>
               <li><a href="{{ url_for('sell') }}">Sell<i class="material-icons right">attach_money</i></a></li>
               <li><a href="{{ url_for('logout') }}">Logout<i class="material-icons right">exit_to_app</i></a></li>
               <!-- Dropdown Trigger -->
@@ -103,33 +107,43 @@
         </nav>
         <ul class="sidenav" id="mobile-demo">
           <li><a href="{{ url_for('index') }}">Home</a></li>
-          <li><a href="{{ url_for('user') }}">Login</a></li>
-          <li><a href="{{ url_for('account') }}">My Account</a></li>
+          <li><a href="{{ url_for('user') }}">My Account</a></li>
           <li><a href="{{ url_for('sell') }}">Sell</a></li>
           <li><a href="#!">Browse by Brand</a></li>
           <li><a href="#!">Browse by Gender</a></li>
           <li><a href="#!">Browse by Size</a></li>
           <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
+        
         {% block content %}
         {% endblock %}
+        
+        <!-- Footer -->
+        <footer>
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <p class="copyright text-muted">Copyright &copy; Next Man's Treasure 2018</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
         <!-- <script src="C:/Users/Sam/Stream_One_Project/Bootstrap/js/bootstrap.js"></script> -->
         <script type="text/javascript">
             
             /* Dropdown side menu */
+            /* Login & register tabs
+            /* Accordion */
             
             $(document).ready(function(){
                 $(".dropdown-trigger").dropdown();
                 $(".sidenav").sidenav();
                 $('select').formSelect();
-            });
-            
-            /* Login & register tabs */
-            
-            $(document).ready(function(){
                 $('.tabs').tabs();
+                $('.collapsible').collapsible();
             });
             
             /* Home page slide show */
@@ -149,6 +163,18 @@
                 setTimeout(carousel, 5000);
                 
             }
+            
+            /* Toggle password visibility */
+            
+            function passwordToggle() {
+                var x = document.getElementById("loginPassword");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+            
         </script>
     </body>
 </html>

@@ -8,7 +8,7 @@
         <div class="col m8 s12">
             <br>
             <h2><center>Welcome to your account, {{ user.username }}!</center></h2>
-            <p>Lorem ipsum...</p>
+            <p>Welcome to your Next Man's Treasure account. Simply scroll down to manage the items that you have listed on site.</p>
             <br>
         </div>
         <div class="col m2 s0">
@@ -27,6 +27,41 @@
             <a class="waves-effect waves-light btn-large" id="size" align="middle"><i class="material-icons right">face</i>Browse by size</a>
         </div>
         <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m8 s12">
+            <ul class="collapsible" data-collapsible="accordion">
+              {% for items in myItems %}
+              <li>
+                <div class="collapsible-header">
+                  <div class="col s2">
+                    <i class="material-icons">expand_more</i>
+                  </div>
+                  <div class="items_header col s10">
+                    <strong>{{items.name}} - £{{items.price}}</strong>
+                  </div>
+                </div>
+                <div class="collapsible-body">
+                  <span>
+                    <strong>Description:</strong> {{items.info}}
+                    <br>
+                    <strong>Brand:</strong> {{items.brand}} <strong>Gender:</strong> {{items.gender}} 
+                    <br>
+                    <strong>Size:</strong> {{items.size}} <strong>Colour:</strong> {{items.colour}} 
+                    <br>
+                    <strong>Condition:</strong> {{items.cond}} <strong>Contact:</strong> {{items.contact}}
+                  </span>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+        </div>
+        <div class="col m2 s0">
             <!-- Empty for styling purposes -->
         </div>
     </div>
