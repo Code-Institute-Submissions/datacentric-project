@@ -38,7 +38,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True)
     email = db.Column(db.String(40), unique=True)
     password = db.Column(db.String(30), unique=True)
-#    listings = db.relationship('Items', backref='author')
+#    listings = db.relationship('Items', backref='author', lazy=True)
     
     def __repr__(self):
         return '<User: %r>' % self.username + self.email
@@ -58,7 +58,7 @@ class Items(db.Model):
     contact = db.Column(db.String(50))
     imageName = db.Column(db.String(100))
     imageData = db.Column(db.LargeBinary)
-#    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+#    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     @property
     def b64_image_data(self):
