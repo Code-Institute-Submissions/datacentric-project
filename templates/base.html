@@ -25,6 +25,10 @@
             h2{
                 font-family: 'Righteous', cursive;
             }
+            h5{
+                font-family: 'Righteous', cursive;
+                margin-top: 5px;
+            }
             p{
                 font-family: 'Roboto Slab', serif;
                 font-size: 20px;
@@ -79,17 +83,46 @@
                 text-align: center;
                 color: #ff0000;
             }
+            #thumbnail{
+                max-height: 150px;
+                max-width: 150px;
+                margin-left: 0px;
+                margin-right: 15px;
+                margin-bottom: 10px;
+                border: 3px solid #b30000;
+            }
+            .collapsible-header{
+                border-radius: 20px;
+                margin-bottom: 10px;
+                font-family: 'Roboto Slab', serif, bold;
+                font-size: 15px;
+            }
+            .items_header, 
+            .dropdown_icon{
+                margin-top: 5px;
+            }
+            #delete{
+                margin-top: 2px;
+                margin-bottom: 2px;
+                font-size: 12px;
+                max-width: 80px;
+            }
+            #edit{
+                margin-top: 2px;
+                margin-bottom: 2px;
+                font-size: 12px;
+                max-width: 80px;
+                background-color: #34bcb5;
+            }
         </style>
     </head>
     <body>
         
         <!-- Dropdown Structure -->
         <ul id="dropdown1" class="dropdown-content">
-          <li><a href="#!">Brand</a></li>
+          <li><a href="{{ url_for('browse_brand') }}">Brand</a></li>
           <li class="divider"></li>
-          <li><a href="#!">Gender</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">Size</a></li>
+          <li><a href="{{ url_for('browse_gender') }}">Gender</a></li>
         </ul>
         <nav class="navbar">
           <div class="nav-wrapper">
@@ -109,9 +142,8 @@
           <li><a href="{{ url_for('index') }}">Home</a></li>
           <li><a href="{{ url_for('user') }}">My Account</a></li>
           <li><a href="{{ url_for('sell') }}">Sell</a></li>
-          <li><a href="#!">Browse by Brand</a></li>
-          <li><a href="#!">Browse by Gender</a></li>
-          <li><a href="#!">Browse by Size</a></li>
+          <li><a href="{{ url_for('browse_brand') }}">Browse by Brand</a></li>
+          <li><a href="{{ url_for('browse_gender') }}">Browse by Gender</a></li>
           <li><a href="{{ url_for('logout') }}">Logout</a></li>
         </ul>
         

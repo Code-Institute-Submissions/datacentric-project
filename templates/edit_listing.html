@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m8 s12">
+            <br>
+            <h2><center>Update a listing</center></h2>
+            <p>Lorem ipsum.</p>
+            <br>
+        </div>
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        
+        <!-- FORM -->
+        <form class="col m6 s12" method="POST" action="/edit_listing">
+          <div class="row">
+            <div class="input-field col m6 s12">
+              <input placeholder="Product Name Here" id="name" name="name" type="text" class="validate">
+              <label for="name">Product Name</label>
+            </div>
+            <div class="input-field col m6 s12">
+                <select name="cond">
+                  <option value="New">New</option>
+                  <option value="Used">Used</option>
+                  <option value="Used (Like New)">Used (Like New)</option>
+                </select>
+                <label for="cond">Condition</label>
+            </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m12 s12">
+                  <input placeholder="Describe Your Product" id="info" name="info" type="text" class="validate">
+                  <label for="info">Product Description</label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m6 s12">
+                  <input placeholder="E.g. 25" id="price" name="price" type="text" class="validate">
+                  <label for="price">Asking Price</label>
+              </div>
+              <div class="input-field col m6 s12" id="buttons">
+                  <button class="btn waves-effect waves-light" type="submit" value="submit">Update Your Listing
+                    <i class="material-icons right">send</i>
+                  </button>
+              </div>
+          </div>
+        </form>
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+</div>
+{% endblock %}

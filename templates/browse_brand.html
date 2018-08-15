@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m6 s12">
+            <h2><center>Browse by brand...</center></h2>
+            <p>Got something specific in mind? Search your favourite brands to see if we can help you find what you're looking for.</p>
+            <br>
+            <form class="col m12 s12" method="GET" action="/search_brand">
+                <div class="form-group">
+                    <label for="query">What brand are you looking for?</label>
+                    <input type="text" class="form-control" name="keyword" id="keyword">
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" value="submit">Search
+                  <i class="material-icons right">search</i>
+                </button>
+            </form>
+            <br>
+        </div>
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m12 s12">
+            {% for items in searchBrand %}
+              <div class="col m12 s12">
+                  <span>
+                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    <strong><h5>{{ items.name }}</h5></strong>
+                    <strong>£{{items.price}}</strong>
+                    <br>
+                    <strong>Description:</strong> {{items.info}}
+                    <br>
+                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <br>
+                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <br>
+                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <br>
+                  </span>
+                  <br>
+                  <hr />
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

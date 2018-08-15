@@ -26,23 +26,10 @@
         </div>
         <div class="col m6 s12" id="buttons">
             <a href="{{ url_for('user') }}" class="waves-effect waves-light btn-large" id="login-btn" align="middle"><i class="material-icons right">lock_open</i>Login to your account</a>
-        </div>
-        <div class="col m3 s0">
-            <!-- Empty for styling purposes -->
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col m3 s0">
-            <!-- Empty for styling purposes -->
-        </div>
-        <div class="col m3 s12" id="buttons">
+            <br>
             <a class="waves-effect waves-light btn-large" id="brand" align="middle"><i class="material-icons right">label</i>Browse by brand</a>
-            <a class="waves-effect waves-light btn-large" id="gender" align="middle"><i class="material-icons right">wc</i>Browse by gender</a>
-        </div>
-        <div class="col m3 s12" id="buttons">
-            <a class="waves-effect waves-light btn-large" id="size" align="middle"><i class="material-icons right">face</i>Browse by size</a>
-            <a href="{{ url_for('sell') }}" class="waves-effect waves-light btn-large" id="sell" align="middle"><i class="material-icons right">attach_money</i>Sell items here</a>
+            <br>
+            <a href="{{ url_for('browse_gender') }}" class="waves-effect waves-light btn-large" id="gender" align="middle"><i class="material-icons right">wc</i>Browse by gender</a>
         </div>
         <div class="col m3 s0">
             <!-- Empty for styling purposes -->

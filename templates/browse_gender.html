@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m8 s12">
+            <h2><center>Lorem ipsum</center></h2>
+            <p>Lorem ipsum.</p>
+            <br>
+        </div>
+        <div class="col m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m12 s12">
+            <ul id="gender-tabs" class="tabs">
+                <li class="tab col m4 s12"><a href="#mens-tab">Mens</a></li>
+                <li class="tab col m4 s12"><a href="#womens-tab">Womens</a></li>
+                <li class="tab col m4 s12"><a class="active" href="#unisex-tab">Unisex</a></li>
+            </ul>
+            
+            <!-- Mens tab -->
+            
+            <div id="mens-tab" class="col m12 s12">
+            <br>
+              {% for items in mensItems %}
+              <div class="col m12 s12">
+                  <span>
+                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    <strong><h5>{{ items.name }}</h5></strong>
+                    <strong>£{{items.price}}</strong>
+                    <br>
+                    <strong>Description:</strong> {{items.info}}
+                    <br>
+                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <br>
+                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <br>
+                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <br>
+                  </span>
+                  <br>
+                  <hr />
+              </div>
+              {% endfor %}
+            </div>
+            
+            <!-- Womens tab -->
+            
+            <div id="womens-tab" class="col m12 s12">
+            <br>
+              {% for items in womensItems %}
+              <div class="col m12 s12">
+                  <span>
+                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    <strong><h5>{{ items.name }}</h5></strong>
+                    <strong>£{{items.price}}</strong>
+                    <br>
+                    <strong>Description:</strong> {{items.info}}
+                    <br>
+                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <br>
+                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <br>
+                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <br>
+                  </span>
+                  <br>
+                  <hr />
+              </div>
+              {% endfor %}
+            </div>
+            
+            <!-- Unisex tab -->
+            
+            <div id="unisex-tab" class="col m12 s12">
+            <br>
+              {% for items in unisexItems %}
+              <div class="col m12 s12">
+                  <span>
+                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    <strong><h5>{{ items.name }}</h5></strong>
+                    <strong>£{{items.price}}</strong>
+                    <br>
+                    <strong>Description:</strong> {{items.info}}
+                    <br>
+                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <br>
+                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <br>
+                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <br>
+                  </span>
+                  <br>
+                  <hr />
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

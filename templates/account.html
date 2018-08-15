@@ -19,49 +19,60 @@
             <!-- Empty for styling purposes -->
         </div>
         <div class="col m3 s12" id="buttons">
-            <a href="{{ url_for('index') }}" class="waves-effect waves-light btn-large" id="sell" align="middle"><i class="material-icons right">home</i>Home</a>
-            <a class="waves-effect waves-light btn-large" id="brand" align="middle"><i class="material-icons right">label</i>Browse by brand</a>
+            <a href="{{ url_for('index') }}" class="waves-effect waves-light btn-large" align="middle"><i class="material-icons right">home</i>Home</a>
+            <a href="{{ url_for('browse_brand') }}" class="waves-effect waves-light btn-large" align="middle"><i class="material-icons right">label</i>Browse by brand</a>
         </div>
         <div class="col m3 s12" id="buttons">
-            <a class="waves-effect waves-light btn-large" id="gender" align="middle"><i class="material-icons right">wc</i>Browse by gender</a>
-            <a class="waves-effect waves-light btn-large" id="size" align="middle"><i class="material-icons right">face</i>Browse by size</a>
+            <a href="{{ url_for('browse_gender') }}" class="waves-effect waves-light btn-large" align="middle"><i class="material-icons right">wc</i>Browse by gender</a>
+            <a href="{{ url_for('sell') }}" class="waves-effect waves-light btn-large" align="middle">Sell<i class="material-icons right">attach_money</i></a>
         </div>
         <div class="col m3 s0">
             <!-- Empty for styling purposes -->
         </div>
     </div>
     <div class="row">
-        <div class="col m2 s0">
+        <div class="col m1 s0">
             <!-- Empty for styling purposes -->
         </div>
-        <div class="col m8 s12">
+        <div class="col m10 s12">
             <ul class="collapsible" data-collapsible="accordion">
               {% for items in myItems %}
               <li>
                 <div class="collapsible-header">
-                  <div class="col s2">
-                    <i class="material-icons">expand_more</i>
+                  <div class="dropdown_icon col s1">
+                    <i class="material-icons">arrow_drop_down</i>
                   </div>
-                  <div class="items_header col s10">
+                  <div class="items_header col s7">
                     <strong>{{items.name}} - £{{items.price}}</strong>
+                  </div>
+                  <div class="col s4">
+                    <a href="{{ url_for('edit_listing', id=items.id) }}" class="btn waves-effect waves-light" id="edit">Edit</a>
+                    <a href="{{ url_for('remove_listing', id=items.id) }}" class="btn waves-effect waves-light" id="delete">Remove</a>
                   </div>
                 </div>
                 <div class="collapsible-body">
                   <span>
+                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
                     <strong>Description:</strong> {{items.info}}
                     <br>
-                    <strong>Brand:</strong> {{items.brand}} <strong>Gender:</strong> {{items.gender}} 
+                    <strong>Brand:</strong> {{items.brand}} 
                     <br>
-                    <strong>Size:</strong> {{items.size}} <strong>Colour:</strong> {{items.colour}} 
+                    <strong>Gender:</strong> {{items.gender}} 
                     <br>
-                    <strong>Condition:</strong> {{items.cond}} <strong>Contact:</strong> {{items.contact}}
+                    <strong>Size:</strong> {{items.size}} 
+                    <br>
+                    <strong>Colour:</strong> {{items.colour}} 
+                    <br>
+                    <strong>Condition:</strong> {{items.cond}} 
+                    <br>
+                    <strong>Contact:</strong> {{items.contact}}                      
                   </span>
                 </div>
               </li>
               {% endfor %}
             </ul>
         </div>
-        <div class="col m2 s0">
+        <div class="col m1 s0">
             <!-- Empty for styling purposes -->
         </div>
     </div>
