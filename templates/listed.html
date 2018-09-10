@@ -15,21 +15,22 @@
         <div class="col m2 s0">
             <!-- Empty for styling purposes -->
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
         <div class="col m3 s0">
             <!-- Empty for styling purposes -->
         </div>
         <div class="col m3 s12" id="buttons">
-            <a href="{{ url_for('index') }}" class="waves-effect waves-light btn-large" id="sell" align="middle"><i class="material-icons right">home</i>Home</a>
-            <a class="waves-effect waves-light btn-large" id="brand" align="middle"><i class="material-icons right">label</i>Browse by brand</a>
+            <a href="{{ url_for('browse_brand') }}" class="waves-effect waves-light btn-large" id="brand" align="middle"><i class="material-icons right">label</i>Browse by brand</a>
+            <br>
         </div>
         <div class="col m3 s12" id="buttons">
-            <a class="waves-effect waves-light btn-large" id="gender" align="middle"><i class="material-icons right">wc</i>Browse by gender</a>
-            <a class="waves-effect waves-light btn-large" id="size" align="middle"><i class="material-icons right">face</i>Browse by size</a>
+            <a href="{{ url_for('browse_gender') }}" class="waves-effect waves-light btn-large" id="gender" align="middle"><i class="material-icons right">wc</i>Browse by gender</a>
+            <br>
         </div>
         <div class="col m3 s0">
             <!-- Empty for styling purposes -->
         </div>
     </div>
-    </div>
+</div>
 {% endblock %}

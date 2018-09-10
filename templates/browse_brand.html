@@ -26,26 +26,38 @@
     </div>
     <div class="row">
         <div class="col m12 s12">
-            {% for items in searchBrand %}
-              <div class="col m12 s12">
-                  <span>
-                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
-                    <strong><h5>{{ items.name }}</h5></strong>
-                    <strong>£{{items.price}}</strong>
-                    <br>
-                    <strong>Description:</strong> {{items.info}}
-                    <br>
-                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
-                    <br>
-                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
-                    <br>
-                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
-                    <br>
-                  </span>
-                  <br>
-                  <hr />
-              </div>
-            {% endfor %}
+            {% if searchBrand %}
+                {% for items in searchBrand %}
+                  <div class="col m12 s12">
+                      <span>
+                        <a href="#expand">
+                            <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                        </a>
+                        <a href="#_" class="lightbox" id="expand">
+                            <img src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" />
+                            <div class="caption-container">
+                                <p>{{items.info}}</p>
+                            </div>
+                        </a>
+                        <strong><h5>{{ items.name }}</h5></strong>
+                        <strong>£{{items.price}}</strong>
+                        <br>
+                        <strong>Description:</strong> {{items.info}}
+                        <br>
+                        <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                        <br>
+                        <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                        <br>
+                        <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                        <br>
+                      </span>
+                      <br>
+                      <hr />
+                  </div>
+                {% endfor %}
+            {% else %}
+            <p>Sorry. There don't appear to be any items listed on site that match your search. Please try again.</p>
+            {% endif %}
         </div>
     </div>
 </div>

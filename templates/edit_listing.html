@@ -7,7 +7,7 @@
         </div>
         <div class="col m8 s12">
             <br>
-            <h2><center>Update a listing</center></h2>
+            <h2><center>Update your listing</center></h2>
             <p>Lorem ipsum.</p>
             <br>
         </div>
@@ -21,14 +21,87 @@
         </div>
         
         <!-- FORM -->
-        <form class="col m6 s12" method="POST" action="/edit_listing">
+        <form class="col m6 s12" method="POST" action="/edit_listing/23" enctype="multipart/form-data">
           <div class="row">
             <div class="input-field col m6 s12">
-              <input placeholder="Product Name Here" id="name" name="name" type="text" class="validate">
+              <input value="{{item.name}}" id="name" name="name" type="text" class="validate">
               <label for="name">Product Name</label>
             </div>
             <div class="input-field col m6 s12">
-                <select name="cond">
+              <input value="{{item.brand}}" id="brand" name="brand" type="text" class="validate">
+              <label for="brand">Brand</label>
+            </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m6 s12">
+                <select name="size" value="{{item.size}}">
+                  <optgroup label="Top">
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                  </optgroup>
+                  <optgroup label="Bottom">
+                    <option value="28in">28in</option>
+                    <option value="30in">30in</option>
+                    <option value="32in">32in</option>
+                    <option value="34in">34in</option>
+                    <option value="36in">36in</option>
+                    <option value="38in">38in</option>
+                  </optgroup>
+                  <optgroup label="Feet">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                  </optgroup>
+                </select>
+                <label for="size">Size</label>
+              </div>
+              <div class="input-field col m6 s12">
+                <select name="colour" value="{{item.colour}}">
+                  <option value="Beige">Beige</option>
+                  <option value="Black">Black</option>
+                  <option value="Blue">Blue</option>
+                  <option value="Brown">Brown</option>
+                  <option value="Cream">Cream</option>
+                  <option value="Gold">Gold</option>
+                  <option value="Green">Green</option>
+                  <option value="Grey">Grey</option>
+                  <option value="Maroon">Maroon</option>
+                  <option value="Multi">Multi</option>
+                  <option value="Navy">Navy</option>
+                  <option value="Orange">Orange</option>
+                  <option value="Pink">Pink</option>
+                  <option value="Purple">Purple</option>
+                  <option value="Red">Red</option>
+                  <option value="Silver">Silver</option>
+                  <option value="Stone">Stone</option>
+                  <option value="Tan">Tan</option>
+                  <option value="White">White</option>
+                  <option value="Yellow">Yellow</option>
+                </select>
+                <label for="colour">Colour</label>
+              </div>
+          </div>
+          <div class="row">
+            <div class="input-field col m6 s12">
+                <select name="gender" value="{{item.gender}}">
+                  <option value="Mens">Mens</option>
+                  <option value="Womens">Womens</option>
+                  <option value="Unisex">Unisex</option>
+                </select>
+                <label for="gender">Gender</label>
+            </div>
+            <div class="input-field col m6 s12">
+                <select name="cond" value="{{item.cond}}">
                   <option value="New">New</option>
                   <option value="Used">Used</option>
                   <option value="Used (Like New)">Used (Like New)</option>
@@ -38,16 +111,28 @@
           </div>
           <div class="row">
               <div class="input-field col m12 s12">
-                  <input placeholder="Describe Your Product" id="info" name="info" type="text" class="validate">
+                  <input value="{{item.info}}" id="info" name="info" type="text" class="validate">
                   <label for="info">Product Description</label>
               </div>
           </div>
           <div class="row">
               <div class="input-field col m6 s12">
-                  <input placeholder="E.g. 25" id="price" name="price" type="text" class="validate">
+                  <input value="{{item.price}}" id="price" name="price" type="text" class="validate">
                   <label for="price">Asking Price</label>
               </div>
-              <div class="input-field col m6 s12" id="buttons">
+              <div class="input-field col m6 s12 form-group" id="buttons">
+                  <input type="button" id="loadFile" value="{{item.imageName}}" onclick="document.getElementById('image').click();">
+                  <input id="image" name="inputFile" type="file" class="validate" style="display:none;">
+              </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m12 s12">
+                  <input value="{{item.contact}}" id="contact" name="contact" type="text" class="validate">
+                  <label for="contact">Email</label>
+              </div>
+          </div>
+          <div class="row">
+              <div class="input-field col m12 s12" id="buttons">
                   <button class="btn waves-effect waves-light" type="submit" value="submit">Update Your Listing
                     <i class="material-icons right">send</i>
                   </button>
