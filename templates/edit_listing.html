@@ -8,7 +8,17 @@
         <div class="col m8 s12">
             <br>
             <h2><center>Update your listing</center></h2>
-            <p>Lorem ipsum.</p>
+            <p>Here you can update the details of your listing. Remember to ensure that all fields have been completed and that an image has been re-uploaded before submitting your changes.</p>
+            <br>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert" role="alert">
+                      {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
             <br>
         </div>
         <div class="col m2 s0">
@@ -21,7 +31,7 @@
         </div>
         
         <!-- FORM -->
-        <form class="col m6 s12" method="POST" action="/edit_listing/23" enctype="multipart/form-data">
+        <form class="col m6 s12" method="POST" enctype="multipart/form-data">
           <div class="row">
             <div class="input-field col m6 s12">
               <input value="{{item.name}}" id="name" name="name" type="text" class="validate">
@@ -42,7 +52,7 @@
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                     <option value="XXL">XXL</option>
-                  </optgroup>
+                  </optgroup
                   <optgroup label="Bottom">
                     <option value="28in">28in</option>
                     <option value="30in">30in</option>

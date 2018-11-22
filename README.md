@@ -1,29 +1,71 @@
 # Data-centric milestone project
 
-### Purpose
+This is a data-driven web application which provides users with a free resource whereby they can browse, list and advertise items of 
+clothing online. Users must be registered and logged into their own personal account in order to list items, and update and remove 
+listings. Users are also able to browse items on site using one of two search functions. 'Search by gender' categorises all items on 
+site by gender, allowing the user to browse all available mens, womens and unisex items. 'Search by brand' incorporates a keyword 
+search function, enabling users to find items by entering specific brand names into a search bar.
 
-This is a data-driven web application which enables users to browse, list and advertise items of clothing online.
-Users must be registered and logged into their own personal account in order to list items, and update and remove listings.
+## UX
 
-Users can browse items on site using one of two search functions. 'Search by gender' categorises items by gender, whereas
-'search by brand' allows users to search for items by entering keywords into a search bar.
+This application was developed with the needs of various types of users in mind, namely buyers and sellers of clothing items, looking
+for an easy and free-to-use platform to do so. The site provides a simple way to browse items, and create, update and delete listings.
 
-### Functionality/technologies used
+- As a retailer, I want to advertise my stock online, to heighten its exposure and increase my sales
+- As a retailer, I want a quick and simple means of listing stock online, to increase efficiency
+- As an individual seller, I want a straightforward and cost-effective means of selling my items, to maximise my profit
+- As an individual buyer, I want a simple way of browsing for items, so that I can easily identify items that I like
 
-This application was written in Python using the Flask Framework. It also incorporates HTML and some custom Javascript logic.
-Some CSS elements were lifted from MaterialiseCSS, although many aspects have been customised, and feature within a custom CSS file.
-The application also incorporates some JQuery logic taken from MaterialiseCSS.
+Mockups created for this project can be found within the 'planning' folder.
 
-CRUD operations are carried out via HTML forms on site, which are used to enter into and update data stored within a database created
-using SQLAlchemy and PostgreSQL. The application makes use of SQLAlchemy's object-relational mapper (ORM) through a foreign key which 
-groups items listed by the ID of the user who listed them. This ensures that, while anybody can browse items on site, only users can 
-edit and remove listings.
+## Features
 
-### Testing
+The promary feature of this application is that it provides CRUD (Create, Read, Update, Delete) functionality to an SQL database 
+via the browser. Users can:
 
-Add testing description here.
+- Create a secure user account, enabling them to list items online
+- Search for items, either by entering keywords into a search bar, or by searching items categorised by gender
+- List items by entering information into a form and uploading an image to be displayed on site 
+- Manage, update and delete listings within their own secure account page
 
-### Deployment
+Other features include:
+
+- Secure, password-protected register and login function 
+- Javascript-powered image carousel
+- View listing page with lightbox feature to zoom in on images
+
+## Technologies used
+
+- **Python**: The underlying code, including views, models and routes, was written in Python.
+- **Flask**: This application was written using the Flask framework, and incorporates various Flask extensions, including Msearch to support the search bar function, and Flask Login to support the login function.
+- **HTML**: HTML was used to structure the website.
+- **CSS**: CSS was used to enhance the appearance of the website. 
+- **Javascript**: The image carousel was developed using custom Javascript logic.
+- **SQL**: All data entered is stored in an SQL database. The application also makes use of SQLAlchemy's object-relational mapper (ORM) through a foreign key which groups items listed by the ID of 
+the user who listed them.
+- **MaterializeCSS**: The front-end framework was used to simplify the design process. Custom MaterializeCSS jQuery logic was also used for features such as tabs and accordions.
+
+## Testing
+
+Many of the key features of this project, including views and the application's login function, were subject to extensive unit-testing. 
+This is documented within the 'tests.py' file, which can be run within the terminal. At the top of each test page, there are instructions 
+on how to run the test file.
+
+Additional code which has since been removed was also used to ensure that the database was being updated upon the submission of forms via 
+the browser. For example, I would add a print statement to the edit listing function, so that the terminal would return the updated product 
+details, confirming that the database was being updated as intended. Regularly accessing the SQL database via the bash terminal also helped 
+me ensure that everything was working as planned.
+
+Testing within the browser was conducted to ensure that error messages were being returned as required, and that visual features such as the 
+image carousel and lightbox were fully functional. Examining the image carousel via the developers tools console within the browser also 
+helped confirm that the Javascript code was working as intended.
+
+This project was developed using a mobile-first approach. A Google Chrome screen resolution tester was used throughout development to ensure 
+that pages and functionalities were easy to navigate and use via different platforms and screen sizes. The app was tested across a range of 
+browsers on both Windows and Mac operating systems, including Chrome, IE, Firefox, Microsoft Edge, and Opera, using CrossBrowserTesting.com's 
+free service.
+
+## Deployment
 
 If deploying this app from github, follow the instructions below:
 
@@ -37,3 +79,14 @@ Make sure that the workspace that you are working in is running Python3, or else
 Finally, before running the app.py file, ensure that the PostgreSQL server is up and running by entering:
 
 'sudo service postgresql start'
+
+## Credits
+
+### Content
+
+- Some CSS elements were lifted from MaterialiseCSS, although the majority of these have been customised
+- The application also incorporates some jQuery logic taken from MaterializeCSS which is acknowledged within the script
+
+### Media
+
+- The photos used on this site were obtained via a Google search for images labelled for reuse

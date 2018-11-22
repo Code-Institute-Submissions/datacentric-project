@@ -11,6 +11,16 @@
             <p>Welcome to your Next Man's Treasure account. Simply scroll down to manage the items that you have listed on site.</p>
             <p>Select the edit button to update your listings, or remove to take down any items that you have sold.</p>
             <br>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert" role="alert">
+                      {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            <br>
         </div>
         <div class="col m2 s0">
             <!-- Empty for styling purposes -->
@@ -91,6 +101,17 @@
             {% endif %}
         </div>
         <div class="col m1 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m3 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col m6 s12" id="buttons">
+            <a href="{{ url_for('logout') }}" class="waves-effect waves-light btn-large" align="middle"><i class="material-icons right">exit_to_app</i>Logout</a>
+        </div>
+        <div class="col m3 s0">
             <!-- Empty for styling purposes -->
         </div>
     </div>

@@ -10,7 +10,6 @@ from io import BytesIO
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
-
 """ Config for SQLAlchemy """
 app = Flask('__name__')
 app.url_map.strict_slashes = False
@@ -38,7 +37,7 @@ manager.add_command('db', MigrateCommand)
 """ Defines secret key necessary for session """
 app.secret_key = os.urandom(24)
 
-""" --------------- Tables --------------- """
+""" --------------- Models --------------- """
 
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
@@ -49,7 +48,7 @@ class User(UserMixin, db.Model):
     listings = db.relationship('Items', backref='user', lazy=True)
     
     def __repr__(self):
-        return '<User: %r>' % self.username + self.email
+        return '<User: %r>' % self.username + self.email + self.password
 
 class Items(db.Model):
     __tablename__ = 'items'
@@ -79,7 +78,7 @@ class Items(db.Model):
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    """ Home page """
+    """ Renders home page """
     return render_template("index.html")
 
 @app.route('/add_user', methods=["GET", "POST"])
@@ -106,6 +105,11 @@ def login():
         flash("Username, email and password combination not recognised. Please try again.")
         return render_template('user.html')
 
+@login_manager.user_loader
+def load_user(user_id):
+    """ Reloads user object from user ID stored in session """
+    return User.query.get(int(user_id))
+
 @app.route('/user', methods=["GET", "POST"])
 def user():
     """ Redirects user to account or login page """
@@ -113,86 +117,73 @@ def user():
         return redirect(url_for('account'))
     else:
         return render_template("user.html", page_title="Log in to your account")
-
-@app.route('/remove_listing/<id>', methods=["GET"])
-def remove_listing(id):
-    """ Removes items from the database """
-    removed = Items.query.filter_by(id=int(id)).delete()
-    db.session.commit()
-    return redirect(url_for('index', removed=removed)) # Change redirect to 'account' once login issue is resolved
-
-@app.route('/account/<username>', methods=["GET", "POST"])
+    
+@app.route('/account', methods=["GET", "POST"])
 @login_required
-def account(username):
+def account():
     """ Displays user account once logged in """
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=current_user.username).first()
     """ Identifies items listed by user """
     myItems = Items.query.filter_by(user_id=current_user.id).all()
     return render_template("account.html", user=user, myItems=myItems)
 
+@app.route('/remove_listing/<id>', methods=["GET"])
+@login_required
+def remove_listing(id):
+    """ Removes items from the database """
+    item = Items.query.get(id)
+    if item.user_id == current_user.id:
+        removed = Items.query.filter_by(id=int(id)).delete()
+        db.session.commit()
+        flash("Thanks! Your listing has been removed.")
+        return redirect(url_for('account', removed=removed))
+    else:
+        abort(403)
+
 @app.route('/edit_listing/<id>', methods=["GET", "POST"])
 @login_required
 def edit_listing(id):
+    """ Enables user to update items in the database """
     item = Items.query.get(id)
     if item.user_id == current_user.id:
         if request.method == 'GET':
             return render_template("edit_listing.html", item=item)
         else:
-            edited = Items.query.get(item.id).update(request.form)
-            db.session.commit()
-            return redirect(url_for('index', edited=edited)) # Change redirect to 'account' once login issue is resolved
+            try:
+                edited = Items.query.filter_by(id=int(id)).update(request.form)
+                db.session.commit()
+                flash("Thanks! Your listing has been updated.")
+                return redirect(url_for('account', edited=edited))
+            except:
+                flash("Please ensure that all fields have been completed and that\
+                an image has been re-uploaded prior to submitting changes to your listing.")
+                return redirect(url_for('edit_listing', id=item.id))
     else:
         abort(403)
-
-    #f = request.files['inputFile']
-    #edited = Items.query.filter_by(id=int(id)).update({ Items.name : request.form['name'], \
-    #Items.brand : request.form['brand'], Items.size : request.form['size'], Items.colour : request.form['colour'], \
-    #Items.cond : request.form['cond'], Items.gender : request.form['gender'], Items.info : request.form['info'], \
-    #Items.price : request.form['price'], Items.contact : request.form['contact'], Items.imageData : f.read(), \
-    #Items.user_id : Items.user_id })
-
-@login_manager.user_loader
-def load_user(user_id):
-    """ Reloads user object from user ID stored in session """
-    return User.query.get(int(user_id))
-
-@app.route('/logout')
-@login_required
-def logout():
-    """ Logs user out """
-    logout_user()
-    flash("You are currently logged out")
-    return redirect(url_for('index'))
 
 @app.route('/sell', methods=["GET", "POST"])
 @login_required
 def sell():
+    """ Renders form for user to add items to the database """
     return render_template("sell.html", page_title="Selling with us")
 
 @app.route('/upload', methods=["GET", "POST"])
 def upload():
-    """ Resizes images uploaded to the database """
-#    img = Image.open(f.stream)
-#    basewidth = 300
-#    wpercent = (basewidth / float(img.size[0]))
-#    height = int((float(img.size[1]) * float(wpercent)))
-#    img = img.resize((basewidth, height), Image.ANTIALIAS)
-#    output = BytesIO()
-#    img.save(output, format=format)
-    """ Uploads information to the SQL database """
+    """ Uploads information to the database """
     userId = current_user.id
     f = request.files['inputFile']
     item = Items(name=request.form['name'], brand=request.form['brand'], size=request.form['size'], \
     colour=request.form['colour'], cond=request.form['cond'], gender=request.form['gender'], \
     info=request.form['info'], price=request.form['price'], contact=request.form['contact'], \
-#    imageName=f.filename, imageData=output.getvalue())
     imageName=f.filename, imageData=f.read(), user_id=userId)
     db.session.add(item)
     db.session.commit()
     return redirect(url_for('listed'))
 
 @app.route('/listed')
+@login_required
 def listed():
+    """ Renders page confirming upload function has worked """
     return render_template("listed.html", page_title="You're all set")
 
 @app.route('/browse_gender')
@@ -201,24 +192,40 @@ def browse_gender():
     mensItems = Items.query.filter_by(gender='Mens').all()
     womensItems = Items.query.filter_by(gender='Womens').all()
     unisexItems = Items.query.filter_by(gender='Unisex').all()
-    return render_template("browse_gender.html", mensItems=mensItems, womensItems=womensItems, unisexItems=unisexItems)
+    return render_template("browse_gender.html", mensItems=mensItems, \
+    womensItems=womensItems, unisexItems=unisexItems)
 
 @app.route('/browse_brand')
 def browse_brand():
+    """ Renders 'browse by brand' html page """
     return render_template("browse_brand.html")
 
 @app.route('/search_brand', methods=["GET"])
 def search_brand():
+    """ Enables user to browse items by searching keywords """
     keyword = request.args.get('keyword')
     searchBrand = Items.query.msearch(keyword,fields=['brand'],limit=30).all()
     return render_template("browse_brand.html", searchBrand=searchBrand)
+
+
+@app.route('/view_listing/<id>', methods=["GET"])
+def view_listing(id):
+    """ Accesses detailed views of individual items """
+    item = Items.query.get(id)
+    return render_template("view_listing.html", item=item)
+
+@app.route('/logout')
+def logout():
+    """ Logs user out """
+    logout_user()
+    flash("You are currently logged out")
+    return redirect(url_for('index'))
 
 search.create_index()
 db.create_all()
 db.session.commit()
 
 if __name__ == '__main__':
-#    manager.run()
     app.run(
         host = os.environ.get('IP'),
         port = os.environ.get('PORT'),

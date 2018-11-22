@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col l1 m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+        <div class="col l10 m8 s12">
+            <h3><center>{{item.name}}</center></h3>
+            <br>
+            <div class="col l6 m12 s12">
+                <a href="#expand">
+                    <img id="detail" src="data:;base64,{{item.b64_image_data}}" alt="{{item.imageName}}" align="center" />
+                </a>
+                <a href="#_" class="lightbox" id="expand">
+                    <img src="data:;base64,{{item.b64_image_data}}" alt="{{item.imageName}}" />
+                    <div class="name">
+                        <h4>{{item.name}}</h4>
+                    </div>
+                </a>
+                <br>
+            </div>
+            <div class="col l6 m12 s12">
+                <span class="info">
+                    <hr>
+                    <b>Price:</b> £{{item.price}}
+                    <hr>
+                    <b>Description:</b> {{item.info}}
+                    <hr>
+                    <b>Brand:</b> {{item.brand}}
+                    <hr>
+                    <b>Gender:</b> {{item.gender}} 
+                    <hr>
+                    <b>Size:</b> {{item.size}}
+                    <hr>
+                    <b>Colour:</b> {{item.colour}} 
+                    <hr>
+                    <b>Condition:</b> {{item.cond}}
+                    <hr>
+                    <b>Contact:</b> {{item.contact}}
+                    <hr>
+                    <br>
+                    <a href="{{ url_for('browse_gender') }}" class="waves-effect waves-light btn" id="browse"><i class="material-icons right">wc</i>Browse by gender</a>
+                    <a href="{{ url_for('browse_brand') }}" class="waves-effect waves-light btn" id="browse"><i class="material-icons right">label</i>Browse by brand</a>
+                </span>
+            </div>
+        </div>
+        <div class="col l1 m2 s0">
+            <!-- Empty for styling purposes -->
+        </div>
+    </div>
+</div>
+{% endblock %}

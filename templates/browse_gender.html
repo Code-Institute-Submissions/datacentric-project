@@ -6,8 +6,8 @@
             <!-- Empty for styling purposes -->
         </div>
         <div class="col m8 s12">
-            <h2><center>Lorem ipsum</center></h2>
-            <p>Lorem ipsum.</p>
+            <h2><center>Browse by gender...</center></h2>
+            <p>Take a look at everything listed on site, arranged by gender.</p>
             <br>
         </div>
         <div class="col m2 s0">
@@ -26,78 +26,111 @@
             
             <div id="mens-tab" class="col m12 s12">
             <br>
+            {% if mensItems %}
               {% for items in mensItems %}
-              <div class="col m12 s12">
+                <div class="col m12 s12">
                   <span>
-                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
-                    <strong><h5>{{ items.name }}</h5></strong>
+                    <br>
+                    <a href="{{ url_for('view_listing', id=items.id) }}">
+                        <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    </a>
+                    <a href="{{ url_for('view_listing', id=items.id) }}">
+                        <div class="detail-link">
+                            <strong><h5>{{ items.name }}</h5></strong>
+                        </div>
+                    </a>
                     <strong>£{{items.price}}</strong>
                     <br>
                     <strong>Description:</strong> {{items.info}}
                     <br>
-                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <strong>Brand:</strong> {{items.brand}}
                     <br>
-                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <strong>Size:</strong> {{items.size}}
                     <br>
-                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <strong>Condition:</strong> {{items.cond}}
                     <br>
                   </span>
                   <br>
                   <hr />
-              </div>
+                </div>
               {% endfor %}
+            {% else %}
+            <p>Sorry. There don't appear to be any items listed on site that match your search. Please try again.</p>
+            {% endif %}
             </div>
             
             <!-- Womens tab -->
             
             <div id="womens-tab" class="col m12 s12">
             <br>
+            {% if womensItems %}
               {% for items in womensItems %}
-              <div class="col m12 s12">
+                <div class="col m12 s12">
                   <span>
-                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
-                    <strong><h5>{{ items.name }}</h5></strong>
+                    <br>
+                    <a href="{{ url_for('view_listing', id=items.id) }}">
+                        <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    </a>
+                    <a href="{{ url_for('view_listing', id=items.id) }}">
+                        <div class="detail-link">
+                            <strong><h5>{{ items.name }}</h5></strong>
+                        </div>
+                    </a>
                     <strong>£{{items.price}}</strong>
                     <br>
                     <strong>Description:</strong> {{items.info}}
                     <br>
-                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <strong>Brand:</strong> {{items.brand}}
                     <br>
-                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <strong>Size:</strong> {{items.size}}
                     <br>
-                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <strong>Condition:</strong> {{items.cond}}
                     <br>
                   </span>
                   <br>
                   <hr />
-              </div>
+                </div>
               {% endfor %}
+            {% else %}
+            <p>Sorry. There don't appear to be any items listed on site that match your search. Please try again.</p>
+            {% endif %}
             </div>
             
             <!-- Unisex tab -->
             
             <div id="unisex-tab" class="col m12 s12">
             <br>
+            {% if unisexItems %}
               {% for items in unisexItems %}
-              <div class="col m12 s12">
+                <div class="col m12 s12">
                   <span>
-                    <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
-                    <strong><h5>{{ items.name }}</h5></strong>
+                    <br>
+                    <a href="{{ url_for('view_listing', id=items.id) }}">
+                        <img id="thumbnail" src="data:;base64,{{items.b64_image_data}}" alt="{{items.imageName}}" align="left" />
+                    </a>
+                    <a href="{{ url_for('view_listing', id=items.id) }}">
+                        <div class="detail-link">
+                            <strong><h5>{{ items.name }}</h5></strong>
+                        </div>
+                    </a>
                     <strong>£{{items.price}}</strong>
                     <br>
                     <strong>Description:</strong> {{items.info}}
                     <br>
-                    <strong>Brand:</strong> {{items.brand}} | <strong>Gender:</strong> {{items.gender}} 
+                    <strong>Brand:</strong> {{items.brand}}
                     <br>
-                    <strong>Size:</strong> {{items.size}} | <strong>Colour:</strong> {{items.colour}} 
+                    <strong>Size:</strong> {{items.size}}
                     <br>
-                    <strong>Condition:</strong> {{items.cond}} | <strong>Contact:</strong> {{items.contact}}
+                    <strong>Condition:</strong> {{items.cond}}
                     <br>
                   </span>
                   <br>
                   <hr />
-              </div>
+                </div>
               {% endfor %}
+            {% else %}
+            <p>Sorry. There don't appear to be any items listed on site that match your search. Please try again.</p>
+            {% endif %}
             </div>
         </div>
     </div>
