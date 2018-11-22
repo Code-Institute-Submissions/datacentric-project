@@ -48,8 +48,8 @@ the user who listed them.
 ## Testing
 
 Many of the key features of this project, including views and the application's login function, were subject to extensive unit-testing. 
-This is documented within the 'tests.py' file, which can be run within the terminal. At the top of each test page, there are instructions 
-on how to run the test file.
+This is documented within the 'tests.py' file, which can be run within the terminal. At the top of the test page, there are instructions 
+on how to run the file.
 
 Additional code which has since been removed was also used to ensure that the database was being updated upon the submission of forms via 
 the browser. For example, I would add a print statement to the edit listing function, so that the terminal would return the updated product 
