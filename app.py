@@ -109,7 +109,7 @@ def user():
     if current_user.is_active:
         return redirect(url_for('account'))
     else:
-        return render_template("user.html", page_title="Log in to your account")
+        return render_template("user.html")
     
 @app.route('/account', methods=["GET", "POST"])
 @login_required
