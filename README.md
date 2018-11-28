@@ -25,7 +25,7 @@ via the browser. Users can:
 
 - Create a secure user account, enabling them to list items online
 - Search for items, either by entering keywords into a search bar, or by searching items categorised by gender
-- List items by entering information into a form and uploading an image to be displayed on site 
+- List items by entering information into a form and uploading an image to be stored in the database displayed on site 
 - Manage, update and delete listings within their own secure account page
 
 Other features include:
@@ -47,9 +47,8 @@ the user who listed them.
 
 ## Testing
 
-Many of the key features of this project, including views and the application's login function, were subject to extensive unit-testing. 
-This is documented within the 'tests.py' file, which can be run within the terminal. At the top of the test page, there are instructions 
-on how to run the file.
+Many of the key features of this project, including views and the application's login function, were subject to unit-testing. This is documented 
+within the 'tests.py' file, which can be run within the terminal. At the top of the test page, there are instructions on how to run the file.
 
 Additional code which has since been removed was also used to ensure that the database was being updated upon the submission of forms via 
 the browser. For example, I would add a print statement to the edit listing function, so that the terminal would return the updated product 
@@ -67,18 +66,11 @@ free service.
 
 ## Deployment
 
-If deploying this app from github, follow the instructions below:
-
-'git clone https://github.com/samalty/datacentric-project'
-
-Once inside the directory, enter:
-
-'sudo pip3 install -r requirements.txt'
-
-Make sure that the workspace that you are working in is running Python3, or else certain elements of functionality won't work.
-Finally, before running the app.py file, ensure that the PostgreSQL server is up and running by entering:
-
-'sudo service postgresql start'
+The final project was pushed to Github, before being deployed to Heroku by way of connecting to the Github workspace. A Heroku Postgres database 
+was included as an add-on when setting up the app in Heroku. Heroku came with its own database URL within config variables, which I used to replace 
+the database config variables that I had used during development. 'gunicorn' was installed via the bash terminal to allow the project to connect 
+to Heroku, and 'psycopg2' was installed to enable the project to interact with the SQL database. The requirements.txt file was duly updated. A 
+Procfile was added to let Heroku know the type of app that it is hosting.
 
 ## Credits
 
@@ -89,4 +81,4 @@ Finally, before running the app.py file, ensure that the PostgreSQL server is up
 
 ### Media
 
-- The photos used on this site were obtained via a Google search for images labelled for reuse
+- The photos used on this site were obtained via a Google search for images labelled for noncommercial reuse

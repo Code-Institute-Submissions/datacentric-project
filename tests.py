@@ -23,7 +23,6 @@ class BaseTestCase(TestCase):
     def setUp(self):
         db.create_all()
         db.session.add(User(username='TestUser', email='testuser@domain.com', password='Resutset'))
-        db.session.commit()
     
     def tearDown(self):
         db.session.remove()
@@ -47,7 +46,7 @@ class ViewsTest(BaseTestCase):
         app.config['LIVESERVER_PORT'] = 0
         return app
     
-class TestUser(BaseTestCase):
+class TestViewsAndFunctions(BaseTestCase):
     
     def test_index_page(self):
         
@@ -77,7 +76,7 @@ class TestUser(BaseTestCase):
                                               password='Resutset'),
                                               follow_redirects=True)
         
-        """ Test to ensure recognised users can log in with invalid credentials """
+        """ Test to ensure recognised users can log in with the correct credentials """
         self.assertIn(b"Welcome to your account, TestUser!", response.data)
     
     def test_user_page_register_valid_credentials(self):
@@ -87,16 +86,14 @@ class TestUser(BaseTestCase):
                                                  password='Test2'),
                                                  follow_redirects=True)
         
-        """ Test to ensure recognised users can register with valid credentials """
+        """ Test to ensure users can register with valid credentials """
         self.assertIn(b"Welcome to your account, Test2!", response.data)
-        #self.assertTrue(current_user.username == "Test2")
-        #self.assertTrue(current_user.is_active())
     
     def test_logout(self):
             
         response = self.client.get('/logout', follow_redirects=True)
         
-        """ Tests redirect path for logout function """
+        """ Tests logout function follows correct redirect path """
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"Welcome to Next Man's Treasure", response.data)
     
@@ -104,34 +101,22 @@ class TestUser(BaseTestCase):
         
         response = self.client.get('/account')
         
-        """ Tests response status code """
-        self.assertEqual(response.status_code, 200)
-        
-        """ Tests correct template is used """
-        #self.assertTemplateUsed('account.html')
-        #self.assertIn(b"Welcome to your account", response.data)
+        """ Tests pages response status code is 401 when user is unauthorised """
+        self.assertEqual(response.status_code, 401)
 
     def test_sell_page(self):
             
         response = self.client.get('/sell')
         
-        """ Tests response status code where user isn't logged in """
+        """ Tests pages response status code is 401 when user is unauthorised """
         self.assertEqual(response.status_code, 401)
-        
-        """ Tests correct template is used """
-        #self.assertTemplateUsed('sell.html')
-        #self.assertIn(b"Selling with us", response.data)
         
     def test_listed_page(self):
             
         response = self.client.get('/listed')
         
-        """ Tests response status code """
-#        self.assertEqual(response.status_code, 200)
-        
-        """ Tests correct template is used """
-#        self.assertTemplateUsed('listed.html')
-#        self.assertIn(b"You're all set", response.data)
+        """ Tests pages response status code is 401 when user is unauthorised """
+        self.assertEqual(response.status_code, 401)
 
     def test_browse_brand_page(self):
         
@@ -143,18 +128,6 @@ class TestUser(BaseTestCase):
         """ Tests correct template is used """
         self.assertTemplateUsed('browse_brand.html')
         self.assertTrue(b"Browse by brand" in response.data)
-        
-    def test_search_brand(self):
-        
-        response = self.client.get('/search_brand?keyword=Fred+Perry')
-        
-        """ Tests search brand function returns items meeting search criteria """
-#        self.assertTrue(b"Fred Perry Long Sleeve Polo Shirt" in response.data)
-#        self.assertTrue(b"Maroon Crew Neck T-Shirt" in response.data)
-        
-        """ Tests search brand function doesn't return items not meeting search criteria """
-#        self.assertFalse(b"Boohoo Biker Jacket" in response.data)
-#        self.assertFalse(b"Levi's Women's Sherpa Trucker Jacket" in response.data)
 
     def test_browse_gender_page(self):
         
@@ -166,14 +139,6 @@ class TestUser(BaseTestCase):
         """ Tests correct template is used """
         self.assertTemplateUsed('browse_gender.html')
         self.assertTrue(b"Browse by gender" in response.data)
-        
-        """ Tests existing database items are retrieved within the html page """
-#        self.assertTrue(b"Maroon Crew Neck T-Shirt" in response.data)
-#        self.assertTrue(b"Fila Ole Training Jacket" in response.data)
-        
-        """ Tests non-existing database items aren't retrieved within the html page """
-#        self.assertFalse(b"Flourescent Cycling Jacket" in response.data)
-#        self.assertFalse(b"Liverpool 80's 'Candy' jersey" in response.data)
 
     def test_view_listing_page(self):
         

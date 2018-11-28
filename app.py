@@ -45,7 +45,6 @@ class User(UserMixin, db.Model):
 
 class Items(db.Model):
     __tablename__ = 'items'
-    __searchable__ = ['brand']
     id = db.Column('id', db.Integer, primary_key=True)
     name = db.Column(db.Unicode(50))
     brand = db.Column(db.Unicode(30))
