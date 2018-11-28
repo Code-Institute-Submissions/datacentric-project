@@ -12,8 +12,8 @@ from flask_migrate import Migrate, MigrateCommand
 """ Config for SQLAlchemy """
 app = Flask('__name__')
 app.url_map.strict_slashes = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sixers1983@localhost/nmtdatabase2'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vbociuqqiawsdg:5918c6bdf375a90e4371ed7b68cc4e74a8daf427415f3eba5ea1d601fdb43024@ec2-54-246-117-62.eu-west-1.compute.amazonaws.com:5432/d93ogg6ob0g3vc'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sixers1983@localhost/nmtdatabase2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vbociuqqiawsdg:5918c6bdf375a90e4371ed7b68cc4e74a8daf427415f3eba5ea1d601fdb43024@ec2-54-246-117-62.eu-west-1.compute.amazonaws.com:5432/d93ogg6ob0g3vc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.debug = True
 db = SQLAlchemy(app)
