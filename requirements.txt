@@ -30,6 +30,7 @@ click==6.7
 decorator==4.3.0
 flask-msearch==0.1.7
 flask-whooshalchemy3==0.0.1.dev8
+gunicorn==19.9.0
 image==1.5.24
 infinity==1.4
 intervals==0.8.1
