@@ -3,24 +3,17 @@ import db
 from flask import Flask, render_template, redirect, request, url_for, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_msearch import Search
 from base64 import b64encode
 from PIL import Image
 from io import BytesIO
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
-# SQLAlchemy Searchable
-from sqlalchemy_searchable import make_searchable
-from sqlalchemy_utils.types import TSVectorType
-
-make_searchable(db.metadata)
-
 """ Config for SQLAlchemy """
 app = Flask('__name__')
 app.url_map.strict_slashes = False
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sixers1983@localhost/nmtdatabase2'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vbociuqqiawsdg:5918c6bdf375a90e4371ed7b68cc4e74a8daf427415f3eba5ea1d601fdb43024@ec2-54-246-117-62.eu-west-1.compute.amazonaws.com:5432/d93ogg6ob0g3vc'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sixers1983@localhost/nmtdatabase2'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vbociuqqiawsdg:5918c6bdf375a90e4371ed7b68cc4e74a8daf427415f3eba5ea1d601fdb43024@ec2-54-246-117-62.eu-west-1.compute.amazonaws.com:5432/d93ogg6ob0g3vc'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.debug = True
 db = SQLAlchemy(app)
@@ -28,13 +21,6 @@ db = SQLAlchemy(app)
 """ Config for Flask Login """
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-""" Config for Flask Msearch """
-MSEARCH_INDEX_NAME = 'whoosh_index'
-MSEARCH_BACKEND = 'whoosh'
-MSEARCH_ENABLE = True
-search = Search()
-search.init_app(app)
 
 """ Config for Flask Migrate """
 migrate = Migrate(app, db)
@@ -73,7 +59,6 @@ class Items(db.Model):
     imageName = db.Column(db.Unicode(100))
     imageData = db.Column(db.LargeBinary)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    search_vector = db.Column(TSVectorType('name','brand'))
     
     @property
     def b64_image_data(self):
@@ -180,7 +165,7 @@ def upload():
     """ Uploads information to the database """
     userId = current_user.id
     f = request.files['inputFile']
-    item = Items(name=request.form['name'], brand=request.form['brand'], size=request.form['size'], \
+    item = Items(name=request.form['name'].title(), brand=request.form['brand'].title(), size=request.form['size'], \
     colour=request.form['colour'], cond=request.form['cond'], gender=request.form['gender'], \
     info=request.form['info'], price=request.form['price'], contact=request.form['contact'], \
     imageName=f.filename, imageData=f.read(), user_id=userId)
@@ -211,10 +196,9 @@ def browse_brand():
 @app.route('/search_brand', methods=["GET"])
 def search_brand():
     """ Enables user to browse items by searching keywords """
-    keyword = request.args.get('keyword')
-    searchBrand = Items.query.msearch(keyword,fields=['brand'],limit=30).all()
+    keyword = request.args.get('keyword').title()
+    searchBrand = Items.query.filter_by(brand=keyword).all()
     return render_template("browse_brand.html", searchBrand=searchBrand)
-
 
 @app.route('/view_listing/<id>', methods=["GET"])
 def view_listing(id):
@@ -229,7 +213,6 @@ def logout():
     flash("You are currently logged out")
     return redirect(url_for('index'))
 
-search.create_index()
 db.create_all()
 db.session.commit()
 
